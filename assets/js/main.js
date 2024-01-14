@@ -26,21 +26,14 @@ function convertPokemonToHtml(pokemon) {
 
 const pokemonList = document.getElementById('pokemonList')
 
-//interação com uma promise
-fetch(url) // usando eron function => 
-//convertendo o body em json
-  .then((response) => response.json()) 
-//pegando o jsonBody.results para trabalharmos com ele 
-  .then((jsonBody) => jsonBody.results) 
-//printando lista de pokemons
-  .then((pokemons) =>{ 
-    //percorrendo a lista de pokemons
-    for (let i = 0; i < pokemons.length; i++) {
-      const pokemon = pokemons[i];
-      pokemonList.innerHTML += convertPokemonToHtml(pokemon);
-    }
-    
-  })
-// se houver erro
-  .catch((error) => console.log(error))
-  
+pokeApi.getpokemons().then((pokemons) => { 
+  const listItens = []
+
+  //percorrendo a lista de pokemons
+  for (let i = 0; i < pokemons.length; i++) {
+    const pokemon = pokemons[i];
+    listItens.push(convertPokemonToHtml(pokemon))
+  }
+  console.log(listItens)
+})
+
