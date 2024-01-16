@@ -1,7 +1,3 @@
-const offset = 0;
-const limit = 20;
-
-const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
 
 //função para replicar o LI e assim completarmos a nossa lista
 function convertPokemonToHtml(pokemon) {
@@ -24,16 +20,11 @@ function convertPokemonToHtml(pokemon) {
   `
 }
 
+//MANIPULANDO ELEMENTOS
 const pokemonList = document.getElementById('pokemonList')
 
-pokeApi.getpokemons().then((pokemons) => { 
-  const listItens = []
-
-  //percorrendo a lista de pokemons
-  for (let i = 0; i < pokemons.length; i++) {
-    const pokemon = pokemons[i];
-    listItens.push(convertPokemonToHtml(pokemon))
-  }
-  console.log(listItens)
+//passando uma lista vazia como padrão []
+pokeApi.getpokemons().then((pokemons = []) => {
+  pokemonList.innerHTML = pokemons.map(convertPokemonToHtml).join('')
 })
 
